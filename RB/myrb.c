@@ -12,10 +12,6 @@ void insert(struct tree *t, int key){
     rb_insert(t, x);
 }
 
-void rb_print(struct tree *t){
-    // imprimir nodo, altura e cor
-}
-
 int main(){
     char op;
     int key;

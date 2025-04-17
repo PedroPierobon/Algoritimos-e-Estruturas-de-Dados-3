@@ -10,6 +10,7 @@ struct node *create_nodedo (int key, struct node *dad){
    n->left = NULL;
    n->right = NULL;
    n->dad = dad;
+   n->color = 1; // vermelho
    return n;
 
 }
@@ -35,8 +36,13 @@ void print_tree (struct node *n){ //não sei com implementar
 
       printf("%d, %d, %d", find_min(n), , n->color);
 
+void print_tree (struct no *root, int h){ 
+   if(root == NULL) return;
+    printTree(root->left, h + 1);
+    printf("%d,%d,%d", root->key, h, root->color);
+    printTree(root->right, h + 1);
+    return;
 }
-*/
 
 void rot_left(struct tree *t, struct node *x){
 
@@ -64,6 +70,27 @@ void rot_left(struct tree *t, struct node *x){
 void rot_right(struct tree *t, struct node *x){
 
    struct node *y = x->left;
+// Substitui a subárvore com raiz no u pela com raiz no v
+void rb_transplant(struct tree *t, struct no *u, struct no *v){
+   if(u->dad == NULL)
+      t->root = v;
+   else if(u == u->dad->left)
+      u->dad->left = v;
+   else u->dad->right = v;
+
+   v->dad = u->dad;
+}
+
+// Remover x
+void rb_remove(struct tree *t, struct no *x){
+   if (x->color == 1 && x->left == NULL && x->right == NULL){
+      node_delete(x);
+   }
+}
+
+void rot_right(struct tree *t, struct no *x){
+
+   struct no *y = x->left;
 
    x->left = y->right;
 
@@ -160,7 +187,6 @@ void rb_insert(struct tree *t, struct node *z){
       y->right = z;
    z->left = NULL;
    z->right = NULL;
-   z->color = 1;
    rb_insert_fixup(t, z);
 }
 
