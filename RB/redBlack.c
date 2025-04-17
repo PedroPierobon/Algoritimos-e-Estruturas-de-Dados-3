@@ -62,5 +62,56 @@ void rot_left(struct tree *t, struct no *x){
 }
 
 void rb_remove(struct tree *t, struct no *x){
-   
-} 
+
+}
+
+void rot_right(struct tree *t, struct no *x){
+
+   struct no *y = x->left;
+
+   x->left = y->right;
+
+   if(y->right != NULL)
+      y->right->dad = x;
+
+   y->dad = x->dad;
+
+   if(x->dad == NULL)
+      t->root = y;
+   else if(x == x->dad->right)
+      x->dad->right = y;
+   else
+      x->dad->left = y;
+
+   y->right = x;
+   x->dad = y;
+
+}
+
+void rb_insert(struct tree *t, struct no *z){
+
+   struct no *y = NULL;
+   struct no *x = t->root;
+
+   while(x != NULL){
+      y = x;
+      if(z->key < x->key)
+         x = x->left;
+      else
+         x = x->right;
+   }
+
+   z->dad = y;
+
+   if(y == NULL)
+      t->root = z;
+   else if(z->key < x->key)
+      y->left = z;
+   else
+      y->right = z;
+   z->left = NULL;
+   z->right = NULL;
+   z->color = 1;
+   rb_insert_fixup(t, z);
+}
+
