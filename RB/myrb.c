@@ -23,6 +23,7 @@ int main(){
             break;
         
         default:
+            printf("INVÁLIDO");
             break;
         }
     }
