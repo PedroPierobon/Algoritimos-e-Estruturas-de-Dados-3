@@ -61,4 +61,6 @@ void rot_left(struct tree *t, struct no *x){
 
 }
 
-
+void rb_remove(struct tree *t, struct no *x){
+   
+} 

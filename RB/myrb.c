@@ -1,9 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include "redBlack.h"
+#include "redBlack.h"
 
-void print_tree(struct tree* tree){
-    return;
+void remove(struct tree *t, int key){
+    struct no *x = search(t->root, key);
+    rb_remove(t, x);
+}
+
+void insert(struct tree *t, int key){
+    struct no *x = create_nodo(key, NULL);
+    rb_insert(t, x);
+}
+
+void rb_print(struct tree *t){
+    // imprimir nodo, altura e cor
 }
 
 int main(){
@@ -28,6 +38,6 @@ int main(){
         }
     }
 
-    print_tree(tree);
+    rb_print(tree);
     return 0;
 }
