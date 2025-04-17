@@ -33,7 +33,7 @@ void transplant (struct tree *t, struct no *u, struct no *v);
 
 void tree_delete (struct tree *t, struct no *z);
 
-void rb_insert (struct no *t, struct no *x);
+void rb_insert (struct tree *t, struct no *x);
 
 void rb_remove (struct tree *t, struct no *x);
 
