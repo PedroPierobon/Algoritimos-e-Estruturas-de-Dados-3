@@ -2,39 +2,42 @@
 #define RED__BLACK
 
 struct tree {
-  struct no *root;
+  struct node *root;
 };
 
-struct no {
+struct node {
   int key;
   int color;
-  int height;
-  struct no *left;
-  struct no *right;
-  struct no *dad;
+  struct node *left;
+  struct node *right;
+  struct node *dad;
 
 };
 
-struct no *create_nodo (int key, struct no *pai);
+struct node *create_nodedo (int key, struct node *pai);
 
-struct no *search (struct no *n, int key);
+struct node *search (struct node *n, int key);
 
-void print_tree (struct no *no);
+void print_tree (struct node *node);
 
-void rot_left (struct tree *t, struct no *x);
+void rot_left (struct tree *t, struct node *x);
 
-void rot_right (struct tree *t, struct no *x);
+void rot_right (struct tree *t, struct node *x);
 
-struct no *tree_min (struct no *n, struct no *x);
+struct node *tree_min (struct node *n, struct node *x);
 
-struct no *tree_max (struct no *n, struct no *x);
+struct node *tree_max (struct node *n, struct node *x);
 
-void transplant (struct tree *t, struct no *u, struct no *v);
+void transplant (struct tree *t, struct node *u, struct node *v);
 
-void tree_delete (struct tree *t, struct no *z);
+void node_delete (struct node *z);
 
-void rb_insert (struct tree *t, struct no *x);
+void tree_delete (struct tree *t, struct node *z);
 
-void rb_remove (struct tree *t, struct no *x);
+void rb_insert (struct tree *t, struct node *x);
+
+void rb_insert_fixup (struct tree *t, struct node *z);
+
+void rb_remove (struct tree *t, struct node *x);
 
 #endif

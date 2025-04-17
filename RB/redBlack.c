@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 
-struct no *create_nodo (int key, struct no *dad){
+struct node *create_nodedo (int key, struct node *dad){
 
-   struct no *n = malloc(sizeof(struct no));
+   struct node *n = malloc(sizeof(struct node));
    n->key = key;
    n->left = NULL;
    n->right = NULL;
@@ -14,10 +14,10 @@ struct no *create_nodo (int key, struct no *dad){
 
 }
 
-struct no *search (struct no *n, int key){
+struct node *search (struct node *n, int key){
 
    if(n == NULL)
-      return create_nodo (key, n);
+      printf("%d não encontrado\n", key);
 
    if(n->key > key)
       return search(n->right, key);
@@ -28,7 +28,7 @@ struct no *search (struct no *n, int key){
 }
 
 /*
-void print_tree (struct no *n){ //não sei com implementar
+void print_tree (struct node *n){ //não sei com implementar
 
    if(n == NULL)
       return;
@@ -38,9 +38,9 @@ void print_tree (struct no *n){ //não sei com implementar
 }
 */
 
-void rot_left(struct tree *t, struct no *x){
+void rot_left(struct tree *t, struct node *x){
 
-   struct no *y = x->right;
+   struct node *y = x->right;
 
    x->right = y->left;
 
@@ -61,13 +61,9 @@ void rot_left(struct tree *t, struct no *x){
 
 }
 
-void rb_remove(struct tree *t, struct no *x){
+void rot_right(struct tree *t, struct node *x){
 
-}
-
-void rot_right(struct tree *t, struct no *x){
-
-   struct no *y = x->left;
+   struct node *y = x->left;
 
    x->left = y->right;
 
@@ -88,20 +84,73 @@ void rot_right(struct tree *t, struct no *x){
 
 }
 
-void rb_insert(struct tree *t, struct no *z){
+void rb_insert_fixup(struct tree *t, struct node *z){
 
-   struct no *y = NULL;
-   struct no *x = t->root;
+   struct node *y;
+   while(z->dad->color == 1){
+      if(z->dad == z->dad->dad->left){
+         y = z->dad->dad->left;
+         if(y->color == 1){
+            z->dad->color = 0;
+            y->color = 0;
+            z->dad->dad->color = 1;
+            z = z->dad->dad;
+         }
+         else{ 
+            if(z == z->dad->right){
+               z = z->dad;
+               rot_left(t, z);
+            }
+            z->dad->color = 0;
+            z->dad->dad->color = 1;
+            rot_right(t, z->dad->dad);
+         }
+      }
+      else{
+         if(z->dad == z->dad->dad->right){
+            y = z->dad->dad->right;
+            if(y->color == 1){
+               z->dad->color = 0;
+               y->color = 0;
+               z->dad->dad->color = 1;
+               z = z->dad->dad;
+            }
+            else{ 
+               if(z == z->dad->left){
+                  z = z->dad;
+                  rot_right(t, z);
+               }
+               z->dad->color = 0;
+               z->dad->dad->color = 1;
+               rot_left(t, z->dad->dad);
+            }
+         }
+
+      }
+   }
+}
+
+
+
+void rb_insert(struct tree *t, struct node *z){
+
+   struct node *y = NULL;
+   struct node *x = t->root;
 
    while(x != NULL){
       y = x;
-      if(z->key < x->key)
+      if(z->key < x->key){
          x = x->left;
-      else
+         z->height += 1;
+      }
+      else{
          x = x->right;
+         z->height += 1;
+      }
    }
 
    z->dad = y;
+   z->height += 1;
 
    if(y == NULL)
       t->root = z;
@@ -115,3 +164,17 @@ void rb_insert(struct tree *t, struct no *z){
    rb_insert_fixup(t, z);
 }
 
+void node_delete(struct no *x){
+
+   struct node *y = x->dad;
+
+   if(y->left == x){
+      free()
+   }
+
+
+}
+
+void rb_remove(struct tree *t, struct node *x){
+
+}
