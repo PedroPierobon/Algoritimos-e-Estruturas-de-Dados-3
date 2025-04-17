@@ -1,0 +1,43 @@
+ Exclusão
+ Caso 1: Exclusão de folha da BST
+      busca e exclui substituindo referência para NULL
+ Caso 2: Exclusão de nó no meio da BST com 1 filho
+      busca nó ¨p" e eleva seu filho "f" para que ocupe a
+      posição de "p"
+ Caso 3: Exclusão de nó com 2 filhos no meio da BST
+      
+
+Tree_min(no x){
+    while(x.esq != NULL)
+        x = x.esq;
+}
+
+Transplant(T, u, v){
+    if(u.pai == NULL)
+        T.raiz = v;
+    else if (u == u.pai.esq)
+        u.pai.esq = v;
+    else
+        u.pai.dir = v;
+    if(!v = NULL)
+        v.pai = u.pai;    
+}
+
+Tree_delete(T, z) {
+    if(z.esq == NULL)
+        Transplant(T, z, z.dir);
+    else if(z.dir = NULL)
+        Transplant(T, z, z.esq);
+    else{
+        y = Tree_min(z.dir);
+        if(y.pai != z){
+            Transplant(T, y, y.dir);
+            y.dir = z.dir;
+            y.dir.pai = y;
+        }
+        Transplant(T, z, y);
+        y.esq = z.esq;
+        y.esq.pai = y;
+    }
+}
+malu é linda
