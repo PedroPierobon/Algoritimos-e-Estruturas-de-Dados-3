@@ -20,23 +20,15 @@ struct node *search (struct node *n, int key);
 
 void print_tree (struct node *node);
 
-void rot_left (struct tree *t, struct node *x);
+struct node *tree_min (struct node *x);
 
-void rot_right (struct tree *t, struct node *x);
-
-struct node *tree_min (struct node *n, struct node *x);
-
-struct node *tree_max (struct node *n, struct node *x);
-
-void transplant (struct tree *t, struct node *u, struct node *v);
+struct node *tree_max (struct node *x);
 
 void node_delete (struct node *z);
 
 void tree_delete (struct tree *t, struct node *z);
 
 void rb_insert (struct tree *t, struct node *x);
-
-void rb_insert_fixup (struct tree *t, struct node *z);
 
 void rb_remove (struct tree *t, struct node *x);
 
