@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 
-struct node *create_nodedo (int key, struct node *dad){
+struct node *create_node (int key, struct node *dad){
 
    struct node *n = malloc(sizeof(struct node));
    n->key = key;
@@ -28,15 +28,7 @@ struct node *search (struct node *n, int key){
    return n;
 }
 
-/*
-void print_tree (struct node *n){ //não sei com implementar
-
-   if(n == NULL)
-      return;
-
-      printf("%d, %d, %d", find_min(n), , n->color);
-
-void print_tree (struct no *root, int h){ 
+void print_tree (struct node *root, int h){ 
    if(root == NULL) return;
     printTree(root->left, h + 1);
     printf("%d,%d,%d", root->key, h, root->color);
@@ -67,52 +59,32 @@ void rot_left(struct tree *t, struct node *x){
 
 }
 
+
 void rot_right(struct tree *t, struct node *x){
 
    struct node *y = x->left;
-// Substitui a subárvore com raiz no u pela com raiz no v
-void rb_transplant(struct tree *t, struct no *u, struct no *v){
-   if(u->dad == NULL)
-      t->root = v;
-   else if(u == u->dad->left)
-      u->dad->left = v;
-   else u->dad->right = v;
-
-   v->dad = u->dad;
-}
-
-// Remover x
-void rb_remove(struct tree *t, struct no *x){
-   if (x->color == 1 && x->left == NULL && x->right == NULL){
-      node_delete(x);
-   }
-}
-
-void rot_right(struct tree *t, struct no *x){
-
-   struct no *y = x->left;
-
+   
    x->left = y->right;
-
+   
    if(y->right != NULL)
-      y->right->dad = x;
-
+   y->right->dad = x;
+   
    y->dad = x->dad;
-
+   
    if(x->dad == NULL)
-      t->root = y;
+   t->root = y;
    else if(x == x->dad->right)
-      x->dad->right = y;
+   x->dad->right = y;
    else
-      x->dad->left = y;
-
+   x->dad->left = y;
+   
    y->right = x;
    x->dad = y;
-
+   
 }
 
 void rb_insert_fixup(struct tree *t, struct node *z){
-
+   
    struct node *y;
    while(z->dad->color == 1){
       if(z->dad == z->dad->dad->left){
@@ -152,7 +124,7 @@ void rb_insert_fixup(struct tree *t, struct node *z){
                rot_left(t, z->dad->dad);
             }
          }
-
+         
       }
    }
 }
@@ -160,7 +132,7 @@ void rb_insert_fixup(struct tree *t, struct node *z){
 
 
 void rb_insert(struct tree *t, struct node *z){
-
+   
    struct node *y = NULL;
    struct node *x = t->root;
 
@@ -168,39 +140,53 @@ void rb_insert(struct tree *t, struct node *z){
       y = x;
       if(z->key < x->key){
          x = x->left;
-         z->height += 1;
+         //z->height += 1;
       }
       else{
          x = x->right;
-         z->height += 1;
+         //z->height += 1;
       }
    }
-
+   
    z->dad = y;
-   z->height += 1;
-
+   //z->height += 1;
+   
    if(y == NULL)
-      t->root = z;
+   t->root = z;
    else if(z->key < x->key)
-      y->left = z;
+   y->left = z;
    else
-      y->right = z;
+   y->right = z;
    z->left = NULL;
    z->right = NULL;
    rb_insert_fixup(t, z);
 }
 
-void node_delete(struct no *x){
-
+void node_delete(struct node *x){
+   
    struct node *y = x->dad;
-
+   
    if(y->left == x){
-      free()
+      //free()
    }
-
-
+   
+   
 }
 
-void rb_remove(struct tree *t, struct node *x){
+// Substitui a subárvore com raiz no u pela com raiz no v
+void rb_transplant(struct tree *t, struct node *u, struct node *v){
+   if(u->dad == NULL)
+      t->root = v;
+   else if(u == u->dad->left)
+      u->dad->left = v;
+   else u->dad->right = v;
 
+   v->dad = u->dad;
+}
+
+// Remover x
+void rb_remove(struct tree *t, struct node *x){
+   if (x->color == 1 && x->left == NULL && x->right == NULL){
+      node_delete(x);
+   }
 }
