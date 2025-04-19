@@ -3,6 +3,7 @@
 
 struct tree {
   struct node *root;
+  struct node *nil;
 };
 
 struct node {
@@ -14,22 +15,24 @@ struct node {
 
 };
 
-struct node *create_nodedo (int key, struct node *pai);
+struct node *create_node (int key, struct node *pai, struct tree *t);
 
-struct node *search (struct node *n, int key);
+struct node *search (struct node *n, int key, struct tree *t);
 
-void print_tree (struct node *node);
+void print_tree (struct node *node, int h,struct tree *t);
 
-struct node *tree_min (struct node *x);
+struct node *tree_min (struct node *x, struct tree *t);
 
-struct node *tree_max (struct node *x);
+struct node *tree_max (struct node *x, struct tree *t);
 
-void node_delete (struct node *z);
+void node_delete (struct node *z, struct tree *t);
 
 void tree_delete (struct tree *t, struct node *z);
 
 void rb_insert (struct tree *t, struct node *x);
 
 void rb_remove (struct tree *t, struct node *x);
+
+void rb_destroy (struct node *n, struct tree *t);
 
 #endif
