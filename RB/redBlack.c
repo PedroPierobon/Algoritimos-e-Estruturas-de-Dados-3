@@ -100,8 +100,7 @@ void rb_insert_fixup(struct tree *t, struct node *z){
 
    struct node *y;
    while(z->dad != t->nil && z->dad->color == 1){
-      if(z->dad->dad == t->nil)
-         return;
+
       if(z->dad == z->dad->dad->left){
          y = z->dad->dad->right;
          if(y != t->nil && y->color == 1){
@@ -175,6 +174,7 @@ void rb_insert(struct tree *t, struct node *z){
    z->left = t->nil;
    z->right = t->nil;
    rb_insert_fixup(t, z);
+   t->root->color = 0;
 }
 
 // Somente aceita nós folhas
@@ -276,19 +276,19 @@ void rb_remove(struct tree *t, struct node *z){
       y = tree_min(z->right, t);
       ycolor = y->color;
       x = y->right;
-      if (y->dad != z) {
+      if(y != z->right){
          rb_transplant(t, y, y->right);
          y->right = z->right;
          y->right->dad = y;
-      } else {
+      }
+      else{
          x->dad = y;
       }
-
       rb_transplant(t, z, y);
       y->left = z->left;
       y->left->dad = y;
       y->color = z->color;
-   } 
+   }
    if(ycolor == 0)
       rb_remove_fixup(t, x);
    t->root->color = 0;

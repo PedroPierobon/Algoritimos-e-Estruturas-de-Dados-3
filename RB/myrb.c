@@ -10,7 +10,7 @@ void r_remove(struct tree *t, int key){
 }
 
 void insert(struct tree *t, int key){
-    struct node *x = create_node(key, NULL, t);
+    struct node *x = create_node(key, t->nil, t);
     rb_insert(t, x);
 }
 
