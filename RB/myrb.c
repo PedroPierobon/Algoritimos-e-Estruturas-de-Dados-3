@@ -41,7 +41,7 @@ int main(){
                 break;
 
             case 'r':
-                if(t->root == NULL)
+                if(t->root == t->nil)
                     perror("Árvore vazia");
                 printf("Retirando %d na RB\n", key);
                 r_remove(t, key);

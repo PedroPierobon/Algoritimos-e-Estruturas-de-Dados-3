@@ -273,20 +273,20 @@ void rb_remove(struct tree *t, struct node *z){
       rb_transplant(t, z, z->left);
    }
    else{
-      y = tree_min(z->right, t);
+      y = tree_max(z->left, t);
       ycolor = y->color;
-      x = y->right;
-      if(y != z->right){
-         rb_transplant(t, y, y->right);
-         y->right = z->right;
-         y->right->dad = y;
+      x = y->left;
+      if(y != z->left){
+         rb_transplant(t, y, y->left);
+         y->left = z->left;
+         y->left->dad = y;
       }
       else{
          x->dad = y;
       }
       rb_transplant(t, z, y);
-      y->left = z->left;
-      y->left->dad = y;
+      y->right = z->right;
+      y->right->dad = y;
       y->color = z->color;
    }
    if(ycolor == 0)
