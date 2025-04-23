@@ -120,27 +120,26 @@ void rb_insert_fixup(struct tree *t, struct node *z){
          }
       }
       else{
-         if(z->dad == z->dad->dad->right){
-            y = z->dad->dad->left;
-            if(y != t->nil && y->color == 1){
-               z->dad->color = 0;
-               y->color = 0;
-               z->dad->dad->color = 1;
-               z = z->dad->dad;
+         y = z->dad->dad->left;
+         if(y != t->nil && y->color == 1){
+            z->dad->color = 0;
+            y->color = 0;
+            z->dad->dad->color = 1;
+            z = z->dad->dad;
+         }
+         else{ 
+            if(z == z->dad->left){
+               z = z->dad;
+               rot_right(t, z);
             }
-            else{ 
-               if(z == z->dad->left){
-                  z = z->dad;
-                  rot_right(t, z);
-               }
-               z->dad->color = 0;
-               z->dad->dad->color = 1;
-               rot_left(t, z->dad->dad);
+            z->dad->color = 0;
+            z->dad->dad->color = 1;
+            rot_left(t, z->dad->dad);
             }
          }
 
       }
-   }
+      return;
 }
 
 
@@ -171,8 +170,6 @@ void rb_insert(struct tree *t, struct node *z){
       y->left = z;
    else
       y->right = z;
-   z->left = t->nil;
-   z->right = t->nil;
    rb_insert_fixup(t, z);
    t->root->color = 0;
 }
@@ -289,8 +286,10 @@ void rb_remove(struct tree *t, struct node *z){
       y->right->dad = y;
       y->color = z->color;
    }
-   if(ycolor == 0)
+   if(ycolor == 0){
       rb_remove_fixup(t, x);
+      t->nil->dad = t->nil;
+   }
    t->root->color = 0;
    free(z);
 }

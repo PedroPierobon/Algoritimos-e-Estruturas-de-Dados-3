@@ -36,14 +36,12 @@ int main(){
         switch (op)
         {
             case 'i':
-                printf("Inserindo %d na RB\n", key);
                 insert(t, key);
                 break;
 
             case 'r':
                 if(t->root == t->nil)
                     perror("Árvore vazia");
-                printf("Retirando %d na RB\n", key);
                 r_remove(t, key);
                 break;
 

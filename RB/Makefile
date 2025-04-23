@@ -20,5 +20,19 @@ $(TARGET): $(OBJS)
 
 # Limpa arquivos gerados
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET) Testers/*.temp
 
+# Rodar todos os testes
+test: $(TARGET)
+	@echo "🔍 Rodando testes..."
+	@for i in 1 2 3 4; do \
+		echo "Testando caso $$i..."; \
+		./$(TARGET) < Testers/test$$i.in > Testers/test$$i.temp; \
+		if diff -q Testers/teste$$i.out Testers/test$$i.temp > /dev/null; then \
+			echo "✅ Teste $$i: OK"; \
+		else \
+			echo "❌ Teste $$i: FALHOU"; \
+			echo "  Diferenças:"; \
+			diff -y --suppress-common-lines Testers/teste$$i.out Testers/test$$i.temp || true; \
+		fi; \
+	done
