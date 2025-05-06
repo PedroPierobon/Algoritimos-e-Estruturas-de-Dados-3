@@ -19,7 +19,7 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Limpa arquivos gerados
-clean:
+clear:
 	rm -f $(OBJS) $(TARGET) Testers/*.temp
 
 # Rodar todos os testes
@@ -29,10 +29,10 @@ test: $(TARGET)
 		echo "Testando caso $$i..."; \
 		./$(TARGET) < Testers/test$$i.in > Testers/test$$i.temp; \
 		if diff -q Testers/teste$$i.out Testers/test$$i.temp > /dev/null; then \
-			echo "✅ Teste $$i: OK"; \
+		echo "✅ Teste $$i: OK"; \
 		else \
-			echo "❌ Teste $$i: FALHOU"; \
-			echo "  Diferenças:"; \
-			diff -y --suppress-common-lines Testers/teste$$i.out Testers/test$$i.temp || true; \
+		echo "❌ Teste $$i: FALHOU"; \
+		echo "  Diferenças:"; \
+		diff -y --suppress-common-lines Testers/teste$$i.out Testers/test$$i.temp || true; \
 		fi; \
-	done
+		done
