@@ -1,3 +1,13 @@
+/*
+ *Trabalho de algoritmos e estrutura de dados III:
+ *Árvore red-black
+ *Pedro Endrigo, grr:20240956
+ *Pedro Pierobon, grr:20241729
+ *Código baseado no livro Algoritmos Teoria e Prática 3º edição, Thomas H. Cormen
+*/
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "redBlack.h"
@@ -24,6 +34,7 @@ int main(){
     if(!t->nil)
         perror("Falha na alocação\n");
 
+    //inicia t->nil
     t->nil->dad = t->nil;
     t->nil->left = t->nil;
     t->nil->right = t->nil;

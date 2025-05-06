@@ -16,6 +16,7 @@ struct node *create_node (int key, struct node *dad, struct tree *t){
 
 struct node *search (struct node *n, int key, struct tree *t){
 
+   //caso base da recursãp
    if(n == t->nil){
       printf("%d não encontrado\n", key);
       return t->nil;
@@ -27,12 +28,6 @@ struct node *search (struct node *n, int key, struct tree *t){
       return search(n->right, key, t);
 
    return n;
-}
-
-struct node *tree_min(struct node *x, struct tree *t){
-   while(x->left != t->nil)
-      x = x->left;
-   return x;
 }
 
 struct node *tree_max(struct node *x, struct tree *t){
@@ -135,11 +130,11 @@ void rb_insert_fixup(struct tree *t, struct node *z){
             z->dad->color = 0;
             z->dad->dad->color = 1;
             rot_left(t, z->dad->dad);
-            }
          }
-
       }
-      return;
+
+   }
+   return;
 }
 
 
@@ -172,18 +167,6 @@ void rb_insert(struct tree *t, struct node *z){
       y->right = z;
    rb_insert_fixup(t, z);
    t->root->color = 0;
-}
-
-// Somente aceita nós folhas
-void node_delete(struct node *x, struct tree *t){
-   if(x->dad != t->nil){
-      struct node *y = x->dad;
-      if(y->left == x)
-         y->left = t->nil;
-      else if(y->right == x)
-         y->right = t->nil;
-   }
-   free(x);
 }
 
 // Substitui a subárvore com raiz no u pela com raiz no v
@@ -263,14 +246,14 @@ void rb_remove(struct tree *t, struct node *z){
 
    if (z->left == t->nil) {
       x = z->right;
-      rb_transplant(t, z, z->right);//o que acontece com os filhos da direita?
+      rb_transplant(t, z, z->right);
    }
    else if(z->right == t->nil){
       x = z->left;
       rb_transplant(t, z, z->left);
    }
    else{
-      y = tree_max(z->left, t);
+      y = tree_max(z->left, t);//escolhe o antecessor
       ycolor = y->color;
       x = y->left;
       if(y != z->left){
@@ -294,6 +277,7 @@ void rb_remove(struct tree *t, struct node *z){
    free(z);
 }
 
+//usa o pos ordem para liberar a mémoria ao final da excução
 void rb_destroy(struct node *n, struct tree *t){
    if(n == t->nil) return;
    rb_destroy(n->left, t);

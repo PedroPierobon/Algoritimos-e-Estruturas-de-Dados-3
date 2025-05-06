@@ -19,6 +19,7 @@ struct node *create_node (int key, struct node *pai, struct tree *t);
 
 struct node *search (struct node *n, int key, struct tree *t);
 
+//h representa a altura e deve ser iniciado com 0
 void print_tree (struct node *node, int h,struct tree *t);
 
 struct node *tree_min (struct node *x, struct tree *t);
