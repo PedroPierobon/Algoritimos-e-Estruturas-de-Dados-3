@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -O3 -g
 # Arquivos-fonte e alvo
 SRCS = redBlack.c myrb.c
 OBJS = $(SRCS:.c=.o)
-	TARGET = myrb
+TARGET = myrb
 
 # Regra padrão
 all: $(TARGET)

@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-//#include "hash_table.h"
+#include "hash_table.h"
 
 int main (int argc, char *argv[]) {
+    struct CuckooHashTable ht;
+    init_hash_table(&ht);
+    
     char option = getopt(argc, argv, "h");
     if (option == 'h') {
         printf("Nome: Pedro Pierobon\n");
