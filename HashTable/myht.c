@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-//#include "hashTable.h"
+//#include "hash_table.h"
 
 int main (int argc, char *argv[]) {
     char option = getopt(argc, argv, "h");
