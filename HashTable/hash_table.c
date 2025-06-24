@@ -25,7 +25,7 @@ void insert_key(struct CuckooHashTable* ht, int key) {
     if (ht->m == 0) return;
     int pos1 = h1(key, ht->m);
     // Se a posição em T1 é diferente de ocupado
-    if (ht->T1[pos1].state != OCCUPIED) {
+    if (ht->T1[pos1].state != OCCUPIED || ht->T1[pos1].state != EMPTY) {
         ht->T1[pos1].key = key;
         return;
     } else if (ht->T1[pos1].key == key) return;
@@ -36,6 +36,17 @@ void insert_key(struct CuckooHashTable* ht, int key) {
     ht->T1[pos1].key = key;
 }
 
+int search_key(struct CuckooHashTable* ht, int key){
+    int pos1, pos2;
+    pos1 = h1(key, ht->m);
+    pos2 = h2(key, ht->m);
+    if(ht->T1[pos1].state != EMPTY) return pos1;
+    else if(ht->T2[pos2].state != EMPTY) return pos2;
+
+    return -1;
+}
+
 void remove_key(struct CuckooHashTable* ht, int key) {
+    int pos1, pos2;
 
 }
