@@ -23,5 +23,7 @@ struct CuckooHashTable {
 void init_hash_table(struct CuckooHashTable* ht);
 void insert_key(struct CuckooHashTable* ht, int key);
 void remove_key(struct CuckooHashTable* ht, int key);
+void print_hash(struct CuckooHashTable* ht);
+
 
 #endif

@@ -6,7 +6,7 @@
 int main (int argc, char *argv[]) {
     struct CuckooHashTable ht;
     init_hash_table(&ht);
-    
+    print_hash(&ht);   
     char option = getopt(argc, argv, "h");
     if (option == 'h') {
         printf("Nome: Pedro Pierobon\n");
@@ -21,6 +21,7 @@ int main (int argc, char *argv[]) {
         while (scanf(" %c %d", &op, &key) == 2){
             switch (op) {
                 case 'i':
+                    insert_key(&ht, key);
                     printf("Inserindo %d\n", key);
                     break;
                 case 'r':
@@ -32,5 +33,6 @@ int main (int argc, char *argv[]) {
             }
         }
     }
+    print_hash(&ht);
     return 0;
 }
