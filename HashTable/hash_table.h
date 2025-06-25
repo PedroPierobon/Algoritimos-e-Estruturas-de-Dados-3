@@ -12,6 +12,8 @@ enum SlotState {
 struct HashSlot {
     int key;
     enum SlotState state;
+    int table;
+    int pos;
 };
 
 struct CuckooHashTable {
@@ -24,6 +26,7 @@ void init_hash_table(struct CuckooHashTable* ht);
 void insert_key(struct CuckooHashTable* ht, int key);
 void remove_key(struct CuckooHashTable* ht, int key);
 void print_hash(struct CuckooHashTable* ht);
+void print_hash_teste(struct CuckooHashTable* ht);
 
 
 #endif
